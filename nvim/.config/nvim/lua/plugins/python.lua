@@ -11,24 +11,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 return {
-  -- LSP Configuration
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        pyright = { mason = true, autostart = true },
-        ruff_lsp = {},
-        rust_analyzer = {},
-      },
-    },
-  },
-
-  {
-    "mfussenegger/nvim-dap",
-    opts = {},
-    config = function() end,
-  },
-
   -- Venv selector
   {
     "linux-cultist/venv-selector.nvim",

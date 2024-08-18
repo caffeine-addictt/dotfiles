@@ -11,9 +11,13 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
+    -- AI
+    { import = "lazyvim.plugins.extras.coding.codeium" },
+
     -- Web Development
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
 
     -- Python
     { import = "lazyvim.plugins.extras.lang.python" },
@@ -24,8 +28,34 @@ require("lazy").setup({
     -- Rust
     { import = "lazyvim.plugins.extras.lang.rust" },
 
-    { import = "lazyvim.plugins.extras.lang.json" },
+    -- Golang
     { import = "lazyvim.plugins.extras.lang.go" },
+
+    -- Docker
+    { import = "lazyvim.plugins.extras.lang.docker" },
+
+    -- Database
+    { import = "lazyvim.plugins.extras.lang.sql" },
+
+    -- Kotlin
+    -- { import = "lazyvim.plugins.extras.lang.kotlin" },
+
+    -- Search
+    { import = "lazyvim.plugins.extras.editor.telescope" },
+
+    -- Debugging
+    { import = "lazyvim.plugins.extras.dap.core" },
+    { import = "lazyvim.plugins.extras.dap.nlua" },
+
+    -- Testing
+    { import = "lazyvim.plugins.extras.test.core" },
+
+    -- Misc
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.lang.toml" },
+    { import = "lazyvim.plugins.extras.util.dot" },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
 
     -- import/override with your plugins
