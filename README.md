@@ -1,4 +1,7 @@
-# My dotfiles
+# My dotfiles (for hyprland / qtile)
+
+> [!NOTE]
+> I am currently using `qtile` so the `hyprland` configuration may be outdated.
 
 For cleaner dotfiles management, I have created this dotfiles repo using `GNU/stow`.
 
@@ -7,5 +10,5 @@ For cleaner dotfiles management, I have created this dotfiles repo using `GNU/st
 pacman -S stow
 
 # Symlinking dotfiles
-stow [name]
+stow .
 ```
