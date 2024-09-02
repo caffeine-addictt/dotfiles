@@ -6,3 +6,8 @@ export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE=fcitx5
 export XMODIFIERS="@im=fcitx5"
 fcitx5 &
+
+# Stop black screen on idle
+xset s off
+xset -dpms
+xset s noblank
