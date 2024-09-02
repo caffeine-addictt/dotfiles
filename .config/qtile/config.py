@@ -201,6 +201,10 @@ for i in groups:
 
 
 layouts = [
+    layout.Tile(
+        border_focus="#1F1D2E",
+        border_normal="#1F1D2E",
+    ),
     layout.Columns(
         margin=[10, 10, 10, 10],
         border_focus="#1F1D2E",
@@ -241,10 +245,6 @@ layouts = [
         border_width=0,
     ),
     #  layout.RatioTile(),
-    layout.Tile(
-        border_focus="#1F1D2E",
-        border_normal="#1F1D2E",
-    ),
     #  layout.TreeTab(),
     #  layout.VerticalTile(),
     #  layout.Zoomy(),
