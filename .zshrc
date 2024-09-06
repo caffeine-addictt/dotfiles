@@ -11,9 +11,6 @@ if [ ! -d "$ZINIT_HOME" ]; then
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Patching PATH
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
