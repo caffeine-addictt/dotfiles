@@ -38,7 +38,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.sql" },
 
     -- Kotlin
-    -- { import = "lazyvim.plugins.extras.lang.kotlin" },
+    { import = "lazyvim.plugins.extras.lang.kotlin" },
 
     -- Search
     { import = "lazyvim.plugins.extras.editor.telescope" },
