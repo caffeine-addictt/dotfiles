@@ -12,7 +12,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
     -- AI
-    { import = "lazyvim.plugins.extras.coding.codeium" },
+    { import = "lazyvim.plugins.extras.ai.codeium" },
 
     -- Web Development
     { import = "lazyvim.plugins.extras.lang.typescript" },
