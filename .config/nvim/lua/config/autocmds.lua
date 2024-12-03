@@ -8,3 +8,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     vim.cmd([[set filetype=html]])
   end,
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("tnoremap <Esc><Esc> <C-\\><C-n>")
+  end,
+})
