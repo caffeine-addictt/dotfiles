@@ -24,12 +24,12 @@ disabled = true
 # You can also replace your username with a neat symbol like  to save some space
 [username]
 show_always = true
-style_user = "fg:#CAA9E0 bg:#2C2B3C"
-style_root = "fg:#CAA9E0 bg:#2C2B3C"
+style_user = "fg:#CFB3E5 bg:#2C2B3C"
+style_root = "fg:#CFB3E5 bg:#2C2B3C"
 format = '[ ]($style)' # $user
 
 [directory]
-style = "fg:#91B1F0 bg:#313041"
+style = "fg:#E5B9C6 bg:#313041"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -197,7 +197,7 @@ disabled = true
 
 [[battery.display]]
 threshold = 15
-style = "bold fg:#CAA9E0"
+style = "bold fg:#CFB3E5"
 
 [[battery.display]]
 threshold = 50
