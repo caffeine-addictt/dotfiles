@@ -43,6 +43,9 @@ require("lazy").setup({
     -- Search
     { import = "lazyvim.plugins.extras.editor.telescope" },
 
+    -- Zig
+    { import = "lazyvim.plugins.extras.lang.zig" },
+
     -- Debugging
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.dap.nlua" },
