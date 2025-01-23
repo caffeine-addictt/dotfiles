@@ -13,3 +13,6 @@ opt.shiftwidth = 2
 opt.softtabstop = 2
 opt.tabstop = 2
 opt.autoindent = true
+
+vim.g.matchparen_timeout = 2
+vim.g.matchparen_insert_timeout = 2
