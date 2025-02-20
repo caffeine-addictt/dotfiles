@@ -2,6 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      ensure_installed = { "c", "lua", "rust", "go", "proto" },
       tailwind = {},
       python = {},
     },
@@ -11,6 +12,12 @@ return {
     lazy = false,
     opts = {
       inlay_hints = { enabled = false },
+      servers = {
+        bufls = {},
+        clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        },
+      },
     },
   },
 }
