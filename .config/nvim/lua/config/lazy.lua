@@ -46,6 +46,9 @@ require("lazy").setup({
     -- Zig
     { import = "lazyvim.plugins.extras.lang.zig" },
 
+    -- Rust
+    { import = "lazyvim.plugins.extras.lang.rust" },
+
     -- Debugging
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.dap.nlua" },
