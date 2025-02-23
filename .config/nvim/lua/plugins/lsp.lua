@@ -13,7 +13,6 @@ return {
     opts = {
       inlay_hints = { enabled = false },
       servers = {
-        bufls = {},
         clangd = {
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
         },
