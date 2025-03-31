@@ -13,6 +13,7 @@ fi
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
+source "$HOME/.profile"
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
