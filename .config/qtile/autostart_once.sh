@@ -12,6 +12,15 @@ picom --config ~/.config/picom/picom.conf &
 # Easyeffects
 easyeffects --gapplication-service &
 
+# Set default audio sinks
+MIC_NAME="alsa_input.usb-0c76_USB_PnP_Audio_Device-00.mono-fallback"
+MIC_NODE_ID=$(wpctl status --name | grep "$MIC_NAME" | awk '{print $2}' | head -n1 | sed 's/\.$//')
+if [ -n "$MIC_NODE_ID" ]; then
+  wpctl set-default "$MIC_NODE_ID"
+else
+  echo "Warning: Microphone '$MIC_NAME' not found."
+fi
+
 # Start clipster daemon
 clipster -d
 
