@@ -4,6 +4,8 @@ export QT_IM_MODULE=fcitx5
 export XMODIFIERS="@im=fcitx5"
 fcitx5 &
 
+export GSETTINGS_SCHEMA_DIR="/usr/share/glib-2.0/schemas"
+
 # Stop black screen on idle
 xset s off
 xset -dpms
