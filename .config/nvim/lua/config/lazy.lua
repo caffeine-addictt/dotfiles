@@ -40,6 +40,9 @@ require("lazy").setup({
     -- Kotlin
     { import = "lazyvim.plugins.extras.lang.kotlin" },
 
+    -- Java
+    { import = "lazyvim.plugins.extras.lang.java" },
+
     -- Search
     { import = "lazyvim.plugins.extras.editor.telescope" },
 
