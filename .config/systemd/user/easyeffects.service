@@ -1,0 +1,12 @@
+[Unit]
+Description=EasyEffects
+After=graphical-session.target pipewire.service pipewire-pulse.service
+Wants=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/easyeffects --gapplication-service
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
