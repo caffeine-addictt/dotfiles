@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+# Usage: sudo toggle-tor-mode bridged|plain|status|original
+MODE="$1"
+
+if [[ "$MODE" == "status" ]]; then
+  systemctl is-active --quiet tor && echo "tor: running" || echo "tor: stopped"
+  echo "Current torrc -> $(readlink -f /etc/tor/torrc || /etc/tor/torrc)"
+  exit 0
+fi
+
+if [[ "$MODE" != "bridged" && "$MODE" != "plain" && "$MODE" != "original" ]]; then
+  echo "Usage: sudo toggle-tor-mode bridged|plain|status|original"; exit 2
+fi
+
+SRC="/etc/tor/torrc.${MODE}"
+if [[ ! -f "$SRC" ]]; then
+  echo "Missing $SRC"; exit 3
+fi
+
+sudo cp "$SRC" /etc/tor/torrc
+systemctl restart tor
+sleep 1
+systemctl is-active --quiet tor && echo "Switched to $MODE and tor restarted." || echo "Failed to start tor. Check journalctl -xeu tor.service"
