@@ -1,7 +1,7 @@
 return {
   {
     "davidmh/mdx.nvim",
-    config = true,
+    config = function() end,
     depends = { "nvim-treesitter/nvim-treesitter" },
   },
 }
