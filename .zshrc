@@ -13,7 +13,9 @@ fi
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
-source "$HOME/.profile"
+if [ -f "$HOME/.profile" ]; then
+  source "$HOME/.profile"
+fi
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
