@@ -15,6 +15,12 @@ add_path() {
   export PATH="$dir:$PATH"
 }
 
+add_path "/var/lib/flatpak/exports/bin"
+add_path "$HOME/.local/share/flatpak/exports/bin"
+
+add_path "$HOME/.config/bin"
 add_path "$HOME/.cargo/bin"
 add_path "$HOME/go/bin"
-add_path "$HOME/.config/bin"
+
+# show applications installed through flatpak without restarting
+export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"

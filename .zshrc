@@ -75,10 +75,5 @@ alias c='clear'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-export PATH="$PATH:$XDG_DATA_HOME/flatpak/exports/bin:/var/lib/flatpak/exports/bin"
-
-# show applications installed through flatpak without restarting
-export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share"
-
 # neofetch
 neofetch
