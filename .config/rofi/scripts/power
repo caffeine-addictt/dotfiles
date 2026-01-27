@@ -1,6 +1,6 @@
 #!/bin/bash
 
-options=$(echo -e "  Poweroff\n  Restart\n  Suspend\n  Display\n  Logout")
+options=$(echo -e "  Poweroff\n  Restart\n  Suspend\n🖵 Display Off\n🖵 Display Reset\n  Logout")
 
 selected_option=$(echo -e "$options" | rofi -dmenu -i -mesg "Bye "$USER"!" -config ~/.config/rofi/power.rasi)
 
@@ -15,8 +15,13 @@ case $selected_option in
 "  Suspend")
   systemctl suspend
   ;;
-"  Display")
+"🖵 Display Off")
   xset dpms force off
+  ;;
+"🖵 Display Reset")
+  xset s off
+  xset -dpms
+  xset s noblank
   ;;
 "  Logout")
   pkill -KILL -u "$USER"
