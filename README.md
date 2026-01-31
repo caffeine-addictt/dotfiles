@@ -1,7 +1,6 @@
-# My dotfiles (for hyprland / qtile)
+# My dotfiles
 
-> [!NOTE]
-> I am currently using `qtile` so the `hyprland` configuration may be outdated.
+For hyprland
 
 For cleaner dotfiles management, I have created this dotfiles repo using `GNU/stow`.
 
