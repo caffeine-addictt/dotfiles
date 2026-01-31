@@ -77,5 +77,4 @@ alias c='clear'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# neofetch
-neofetch
+fastfetch
