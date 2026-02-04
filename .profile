@@ -33,3 +33,4 @@ add_env_path PATH "$HOME/go/bin"
 # applications
 add_env_path XDG_DATA_DIRS "/var/lib/flatpak/exports/share"
 add_env_path XDG_DATA_DIRS "$HOME/.local/share/flatpak/exports/share"
+add_env_path XDG_DATA_DIRS "$HOME/.var/app/com.valvesoftware.Steam/data"
