@@ -8,6 +8,10 @@ vim.lsp.set_log_level("WARN")
 
 local opt = vim.opt
 
+opt.shell = "/usr/bin/zsh"
+vim.opt.shellcmdflag = "-lc"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.softtabstop = 2
