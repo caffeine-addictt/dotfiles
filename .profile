@@ -1,26 +1,35 @@
-add_path() {
-  local dir="${1:-}"
+add_env_path() {
+  local var="$1"
+  local dir="$2"
+
+  [[ -n "$var" && -n "$dir" ]] || {
+    printf "add_env_path: missing arguments\nusage: add_env_path <var> <dir>\n" >&2
+    return 1
+  }
 
   [[ -d "$dir" ]] || {
-    printf "add_path: '%s' is not a directory\n" "$dir" >&2
+    printf "add_env_path: '%s' is not a directory\n" "$dir" >&2
     return 1
   }
 
   dir="$(cd "$dir" && pwd -P)" || return 1
 
-  case ":$PATH:" in
+  local cur
+  eval "cur=\"\${$var}\""
+  case ":$cur:" in
   *":$dir:"*) return 0 ;;
   esac
 
-  export PATH="$dir:$PATH"
+  eval "export $var=\"$dir:\$cur\""
 }
 
-add_path "/var/lib/flatpak/exports/bin"
-add_path "$HOME/.local/share/flatpak/exports/bin"
+add_env_path PATH "/var/lib/flatpak/exports/bin"
+add_env_path PATH "$HOME/.local/share/flatpak/exports/bin"
 
-add_path "$HOME/.config/bin"
-add_path "$HOME/.cargo/bin"
-add_path "$HOME/go/bin"
+add_env_path PATH "$HOME/.config/bin"
+add_env_path PATH "$HOME/.cargo/bin"
+add_env_path PATH "$HOME/go/bin"
 
-# show applications installed through flatpak without restarting
-export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
+# applications
+add_env_path XDG_DATA_DIRS "/var/lib/flatpak/exports/share"
+add_env_path XDG_DATA_DIRS "$HOME/.local/share/flatpak/exports/share"
