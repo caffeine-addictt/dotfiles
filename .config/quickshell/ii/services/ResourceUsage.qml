@@ -38,27 +38,27 @@ Singleton {
     }
 
     function updateMemoryUsageHistory() {
-        memoryUsageHistory = [...memoryUsageHistory, memoryUsedPercentage]
+        memoryUsageHistory = [...memoryUsageHistory, memoryUsedPercentage];
         if (memoryUsageHistory.length > historyLength) {
-            memoryUsageHistory.shift()
+            memoryUsageHistory.shift();
         }
     }
     function updateSwapUsageHistory() {
-        swapUsageHistory = [...swapUsageHistory, swapUsedPercentage]
+        swapUsageHistory = [...swapUsageHistory, swapUsedPercentage];
         if (swapUsageHistory.length > historyLength) {
-            swapUsageHistory.shift()
+            swapUsageHistory.shift();
         }
     }
     function updateCpuUsageHistory() {
-        cpuUsageHistory = [...cpuUsageHistory, cpuUsage]
+        cpuUsageHistory = [...cpuUsageHistory, cpuUsage];
         if (cpuUsageHistory.length > historyLength) {
-            cpuUsageHistory.shift()
+            cpuUsageHistory.shift();
         }
     }
     function updateHistories() {
-        updateMemoryUsageHistory()
-        updateSwapUsageHistory()
-        updateCpuUsageHistory()
+        updateCpuUsageHistory();
+        updateMemoryUsageHistory();
+        updateSwapUsageHistory();
     }
 
 	Timer {
