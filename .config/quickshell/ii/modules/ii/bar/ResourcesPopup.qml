@@ -66,7 +66,7 @@ StyledPopup {
                 StyledPopupValueRow {
                     icon: "empty_dashboard"
                     label: ""
-                    value: `${root.toKiB(ResourceUsage.gpuVRamUsedMB)} / ${root.toKiB(ResourceUsage.gpuVRamTotalMB)} GiB`
+                    value: `${root.toKiB(ResourceUsage.gpuVRamUsed)} / ${root.toKiB(ResourceUsage.gpuVRamTotal)} GiB`
                 }
             }
         }

@@ -17,8 +17,8 @@ Singleton {
     property var previousCpuStats
 
     property real gpuUsage: 0
-    property real gpuVRamUsedMB: 0
-    property real gpuVRamTotalMB: 0
+    property real gpuVRamUsed: 0
+    property real gpuVRamTotal: 0
     property real gpuTempC: 0
 
     property real memoryTotal: 1
@@ -118,8 +118,8 @@ Singleton {
 
             // Parse GPU usage
             gpuUsage = Number(gpuUsageFD.text() ?? 0) / 100;
-            gpuVRamUsedMB = parseFloat((Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1));
-            gpuVRamTotalMB = Math.floor((Number(gpuVRamTotalFD.text() ?? 0)) / 1024);
+            gpuVRamUsed = parseFloat((Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1));
+            gpuVRamTotal = Math.floor((Number(gpuVRamTotalFD.text() ?? 0)) / 1024);
             gpuTempC = parseFloat((Number(gpuTempFD.text() ?? 0) / 1000).toFixed(1));
 
             root.updateHistories();
