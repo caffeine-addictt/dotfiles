@@ -23,6 +23,12 @@ StyledOverlayWidget {
             "maxAvailableString": ResourceUsage.maxAvailableCpuString
         },
         {
+            "icon": "planner_review",
+            "name": Translation.tr("GPU"),
+            "history": ResourceUsage.gpuUsageHistory,
+            "maxAvailableString": ResourceUsage.maxAvailableGpuString
+        },
+        {
             "icon": "memory",
             "name": Translation.tr("RAM"),
             "history": ResourceUsage.memoryUsageHistory,

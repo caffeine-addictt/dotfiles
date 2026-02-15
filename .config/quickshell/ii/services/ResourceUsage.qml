@@ -11,6 +11,15 @@ import Quickshell.Io
  */
 Singleton {
     id: root
+
+    property real cpuUsage: 0
+    property var previousCpuStats
+
+    property real gpuUsage: 0
+    property real gpuVRamUsedMB: 0
+    property real gpuVRamTotalMB: 0
+    property real gpuTempC: 0
+
     property real memoryTotal: 1
     property real memoryFree: 0
     property real memoryUsed: memoryTotal - memoryFree
@@ -21,15 +30,14 @@ Singleton {
     property real swapUsed: swapTotal - swapFree
     property real swapUsedPercentage: swapTotal > 0 ? (swapUsed / swapTotal) : 0
 
-    property real cpuUsage: 0
-    property var previousCpuStats
-
-    property string maxAvailableMemoryString: kbToGbString(ResourceUsage.memoryTotal)
-    property string maxAvailableSwapString: kbToGbString(ResourceUsage.swapTotal)
     property string maxAvailableCpuString: "--"
+    property string maxAvailableGpuString: "--"
+    property string maxAvailableMemoryString: kibToGbString(ResourceUsage.memoryTotal)
+    property string maxAvailableSwapString: kibToGbString(ResourceUsage.swapTotal)
 
     readonly property int historyLength: Config?.options.resources.historyLength ?? 60
     property list<real> cpuUsageHistory: []
+    property list<real> gpuUsageHistory: []
     property list<real> memoryUsageHistory: []
     property list<real> swapUsageHistory: []
 
@@ -55,66 +63,92 @@ Singleton {
             cpuUsageHistory.shift();
         }
     }
+    function updateGpuUsageHistory() {
+        gpuUsageHistory = [...gpuUsageHistory, gpuUsage];
+        if (gpuUsageHistory.length > historyLength) {
+            gpuUsageHistory.shift();
+        }
+    }
     function updateHistories() {
         updateCpuUsageHistory();
+        updateGpuUsageHistory();
         updateMemoryUsageHistory();
         updateSwapUsageHistory();
     }
 
-	Timer {
-		interval: 1
-        running: true 
+    Timer {
+        interval: 1
+        running: true
         repeat: true
-		onTriggered: {
-            // Reload files
-            fileMeminfo.reload()
-            fileStat.reload()
+        onTriggered: {
+            fileMeminfo.reload();
+            fileStat.reload();
+            gpuUsageFD.reload();
+            gpuTempFD.reload();
+            gpuVRamTotalFD.reload();
+            gpuVRamUsedFD.reload();
 
             // Parse memory and swap usage
-            const textMeminfo = fileMeminfo.text()
-            memoryTotal = Number(textMeminfo.match(/MemTotal: *(\d+)/)?.[1] ?? 1)
-            memoryFree = Number(textMeminfo.match(/MemAvailable: *(\d+)/)?.[1] ?? 0)
-            swapTotal = Number(textMeminfo.match(/SwapTotal: *(\d+)/)?.[1] ?? 1)
-            swapFree = Number(textMeminfo.match(/SwapFree: *(\d+)/)?.[1] ?? 0)
+            const textMeminfo = fileMeminfo.text();
+            memoryTotal = Number(textMeminfo.match(/MemTotal: *(\d+)/)?.[1] ?? 1);
+            memoryFree = Number(textMeminfo.match(/MemAvailable: *(\d+)/)?.[1] ?? 0);
+            swapTotal = Number(textMeminfo.match(/SwapTotal: *(\d+)/)?.[1] ?? 1);
+            swapFree = Number(textMeminfo.match(/SwapFree: *(\d+)/)?.[1] ?? 0);
 
             // Parse CPU usage
-            const textStat = fileStat.text()
-            const cpuLine = textStat.match(/^cpu\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/)
+            const textStat = fileStat.text();
+            const cpuLine = textStat.match(/^cpu\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/);
             if (cpuLine) {
-                const stats = cpuLine.slice(1).map(Number)
-                const total = stats.reduce((a, b) => a + b, 0)
-                const idle = stats[3]
+                const stats = cpuLine.slice(1).map(Number);
+                const total = stats.reduce((a, b) => a + b, 0);
+                const idle = stats[3];
 
                 if (previousCpuStats) {
-                    const totalDiff = total - previousCpuStats.total
-                    const idleDiff = idle - previousCpuStats.idle
-                    cpuUsage = totalDiff > 0 ? (1 - idleDiff / totalDiff) : 0
+                    const totalDiff = total - previousCpuStats.total;
+                    const idleDiff = idle - previousCpuStats.idle;
+                    cpuUsage = totalDiff > 0 ? (1 - idleDiff / totalDiff) : 0;
                 }
 
-                previousCpuStats = { total, idle }
+                previousCpuStats = {
+                    total,
+                    idle
+                };
             }
 
-            root.updateHistories()
-            interval = Config.options?.resources?.updateInterval ?? 3000
-        }
-	}
+            // Parse GPU usage
+            gpuUsage = Number(gpuUsageFD.text() ?? 0) / 100;
+            gpuVRamUsedMB = parseFloat(( Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1));
+            gpuVRamTotalMB = Math.floor((Number(gpuVRamTotalFD.text() ?? 0)) / 1024);
+            gpuTempC = parseFloat((Number(gpuTempFD.text() ?? 0) / 1000).toFixed(1));
 
-	FileView { id: fileMeminfo; path: "/proc/meminfo" }
-    FileView { id: fileStat; path: "/proc/stat" }
-
-    Process {
-        id: findCpuMaxFreqProc
-        environment: ({
-            LANG: "C",
-            LC_ALL: "C"
-        })
-        command: ["bash", "-c", "lscpu | grep 'CPU max MHz' | awk '{print $4}'"]
-        running: true
-        stdout: StdioCollector {
-            id: outputCollector
-            onStreamFinished: {
-                root.maxAvailableCpuString = (parseFloat(outputCollector.text) / 1000).toFixed(0) + " GHz"
-            }
+            root.updateHistories();
+            interval = Config.options?.resources?.updateInterval ?? 3000;
         }
+    }
+
+    FileView {
+        id: fileMeminfo
+        path: "/proc/meminfo"
+    }
+    FileView {
+        id: fileStat
+        path: "/proc/stat"
+    }
+
+    FileView {
+        id: gpuUsageFD
+        path: "/sys/class/drm/card1/device/gpu_busy_percent"
+    }
+    FileView {
+        id: gpuTempFD
+        path: "/sys/class/drm/card1/device/hwmon/hwmon1/temp1_input"
+    }
+    FileView {
+        id: gpuVRamTotalFD
+        path: "/sys/class/drm/card1/device/mem_info_vram_total"
+    }
+    FileView {
+        id: gpuVRamUsedFD
+        path: "/sys/class/drm/card1/device/mem_info_vram_used"
     }
 }
