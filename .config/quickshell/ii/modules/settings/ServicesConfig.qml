@@ -8,23 +8,6 @@ ContentPage {
     forceWidth: true
 
     ContentSection {
-        icon: "neurology"
-        title: Translation.tr("AI")
-
-        MaterialTextArea {
-            Layout.fillWidth: true
-            placeholderText: Translation.tr("System prompt")
-            text: Config.options.ai.systemPrompt
-            wrapMode: TextEdit.Wrap
-            onTextChanged: {
-                Qt.callLater(() => {
-                    Config.options.ai.systemPrompt = text;
-                });
-            }
-        }
-    }
-
-    ContentSection {
         icon: "music_cast"
         title: Translation.tr("Music Recognition")
 

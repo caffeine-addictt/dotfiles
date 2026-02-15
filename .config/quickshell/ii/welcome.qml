@@ -53,12 +53,6 @@ ApplicationWindow {
         }
     }
 
-    Process {
-        id: translationProc
-        property string locale: ""
-        command: [Directories.aiTranslationScriptPath, translationProc.locale]
-    }
-
     ColumnLayout {
         anchors {
             fill: parent
