@@ -13,6 +13,7 @@ Singleton {
     id: root
 
     property real cpuUsage: 0
+    property real cpuTempC: 0
     property var previousCpuStats
 
     property real gpuUsage: 0
@@ -83,6 +84,7 @@ Singleton {
         onTriggered: {
             fileMeminfo.reload();
             fileStat.reload();
+            cpuTempFD.reload();
             gpuUsageFD.reload();
             gpuTempFD.reload();
             gpuVRamTotalFD.reload();
@@ -114,6 +116,7 @@ Singleton {
                     idle
                 };
             }
+            cpuTempC = parseFloat((Number(cpuTempFD.text() ?? 0) / 1000).toFixed(1));
 
             // Parse GPU usage
             gpuUsage = Number(gpuUsageFD.text() ?? 0) / 100;
@@ -133,6 +136,10 @@ Singleton {
     FileView {
         id: fileStat
         path: "/proc/stat"
+    }
+    FileView {
+        id: cpuTempFD
+        path: "/sys/class/drm/card0/device/hwmon/hwmon2/temp1_input"
     }
 
     FileView {
