@@ -37,7 +37,7 @@ Item {
                 anchors.centerIn: parent
                 width: resourceCircProg.implicitSize
                 height: resourceCircProg.implicitSize
-                
+
                 MaterialSymbol {
                     anchors.centerIn: parent
                     font.weight: Font.DemiBold
@@ -56,7 +56,7 @@ Item {
 
             TextMetrics {
                 id: fullPercentageTextMetrics
-                text: "100"
+                text: "100%"
                 font.pixelSize: Appearance.font.pixelSize.small
             }
 
@@ -65,7 +65,7 @@ Item {
                 anchors.centerIn: parent
                 color: Appearance.colors.colOnLayer1
                 font.pixelSize: Appearance.font.pixelSize.small
-                text: `${Math.round(percentage * 100).toString()}`
+                text: `${Math.round(percentage * 100).toString()}%`
             }
         }
 
