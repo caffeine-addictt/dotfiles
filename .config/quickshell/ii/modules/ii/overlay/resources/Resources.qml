@@ -26,14 +26,14 @@ StyledOverlayWidget {
             "name": Translation.tr("CPU"),
             "history": ResourceUsage.cpuUsageHistory,
             "maxAvailableString": "",
-            "more":  `${ResourceUsage.cpuTempC} °C`
+            "more": `${ResourceUsage.cpuTempC.toFixed(1)} °C`
         },
         {
             "icon": "planner_review",
             "name": Translation.tr("GPU"),
             "history": ResourceUsage.gpuUsageHistory,
             "maxAvailableString": "",
-            "more":  `${ResourceUsage.gpuTempC} °C\n${toKiB(ResourceUsage.gpuVRamUsed)} GiB used`
+            "more": `${ResourceUsage.gpuTempC.toFixed(1)} °C\n${toKiB(ResourceUsage.gpuVRamUsed)} GiB used`
         },
         {
             "icon": "memory",
@@ -85,9 +85,7 @@ StyledOverlayWidget {
             ResourceSummary {
                 Layout.margins: 8
                 history: root.resources[tabBar.currentIndex]?.history ?? []
-                maxAvailableString: root.resources[tabBar.currentIndex]?.maxAvailableString
-                  ? Translation.tr("of %1").arg(root.resources[tabBar.currentIndex].maxAvailableString)
-                  : ""
+                maxAvailableString: root.resources[tabBar.currentIndex]?.maxAvailableString ? Translation.tr("of %1").arg(root.resources[tabBar.currentIndex].maxAvailableString) : ""
                 more: root.resources[tabBar.currentIndex]?.more ?? ""
             }
         }

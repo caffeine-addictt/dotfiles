@@ -118,9 +118,9 @@ Singleton {
 
             // Parse GPU usage
             gpuUsage = Number(gpuUsageFD.text() ?? 0) / 100;
-            gpuVRamUsed = parseFloat((Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1));
-            gpuVRamTotal = Math.floor((Number(gpuVRamTotalFD.text() ?? 0)) / 1024);
-            gpuTempC = parseFloat((Number(gpuTempFD.text() ?? 0) / 1000).toFixed(1));
+            gpuVRamUsed = (Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1);
+            gpuVRamTotal = (Number(gpuVRamTotalFD.text() ?? 0)) / 1024;
+            gpuTempC = (Number(gpuTempFD.text() ?? 0) / 1000).toFixed(1);
 
             root.updateHistories();
             interval = Config.options?.resources?.updateInterval ?? 3000;

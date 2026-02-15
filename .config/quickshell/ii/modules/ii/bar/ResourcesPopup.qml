@@ -38,7 +38,7 @@ StyledPopup {
                 StyledPopupValueRow {
                     icon: "device_thermostat"
                     label: Translation.tr("Temp:")
-                    value: `${ResourceUsage.cpuTempC} °C`
+                    value: `${ResourceUsage.cpuTempC.toFixed(1)} °C`
                 }
             }
         }
@@ -61,7 +61,7 @@ StyledPopup {
                 StyledPopupValueRow {
                     icon: "device_thermostat"
                     label: Translation.tr("Temp:")
-                    value: `${ResourceUsage.gpuTempC} °C`
+                    value: `${ResourceUsage.gpuTempC.toFixed(1)} °C`
                 }
                 StyledPopupValueRow {
                     icon: "empty_dashboard"
