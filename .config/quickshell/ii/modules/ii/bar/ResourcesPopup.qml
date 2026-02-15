@@ -7,9 +7,9 @@ import QtQuick.Layouts
 StyledPopup {
     id: root
 
-    // Helper function to format KB to GB
-    function formatKB(kb) {
-        return (kb / (1024 * 1024)).toFixed(1) + " GB";
+    // Helper function to format KiB to GiB
+    function formatKiB(kb) {
+        return (kb / (1024 * 1024)).toFixed(1) + " GiB";
     }
 
     Row {

@@ -33,8 +33,8 @@ Singleton {
     property list<real> memoryUsageHistory: []
     property list<real> swapUsageHistory: []
 
-    function kbToGbString(kb) {
-        return (kb / (1024 * 1024)).toFixed(1) + " GB";
+    function kibToGibString(kb) {
+        return (kb / (1024 * 1024)).toFixed(1) + " GiB";
     }
 
     function updateMemoryUsageHistory() {
