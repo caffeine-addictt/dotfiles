@@ -29,7 +29,7 @@ MouseArea {
         Resource {
             iconName: "memory"
             percentage: ResourceUsage.gpuUsage
-            shown: (Config.options.bar.resources.alwaysShowGpu) || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
+            shown: Config.options.bar.resources.alwaysShowGpu || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
             Layout.leftMargin: shown ? 6 : 0
             warningThreshold: Config.options.bar.resources.gpuWarningThreshold
         }

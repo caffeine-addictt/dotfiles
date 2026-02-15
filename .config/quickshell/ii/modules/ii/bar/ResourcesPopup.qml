@@ -7,9 +7,12 @@ import QtQuick.Layouts
 StyledPopup {
     id: root
 
-    // Helper function to format KiB to GiB
     function formatKiB(kb) {
-        return (kb / (1024 * 1024)).toFixed(1) + " GiB";
+        return toKiB(kb) + " GiB";
+    }
+
+    function toKiB(kb) {
+        return (kb / (1024 * 1024)).toFixed(1);
     }
 
     Row {
@@ -31,6 +34,12 @@ StyledPopup {
                     label: Translation.tr("Load:")
                     value: `${Math.round(ResourceUsage.cpuUsage * 100)}%`
                 }
+
+                StyledPopupValueRow {
+                    icon: "device_thermostat"
+                    label: Translation.tr("Temp:")
+                    value: `${ResourceUsage.cpuTempC} °C`
+                }
             }
         }
 
@@ -50,14 +59,14 @@ StyledPopup {
                     value: `${Math.round(ResourceUsage.gpuUsage * 100)}%`
                 }
                 StyledPopupValueRow {
-                    icon: "clock_loader_60"
-                    label: Translation.tr("Used:")
-                    value: root.formatKiB(ResourceUsage.gpuVRamUsedMB)
+                    icon: "device_thermostat"
+                    label: Translation.tr("Temp:")
+                    value: `${ResourceUsage.gpuTempC} °C`
                 }
                 StyledPopupValueRow {
                     icon: "empty_dashboard"
-                    label: Translation.tr("Total:")
-                    value: root.formatKiB(ResourceUsage.gpuVRamTotalMB)
+                    label: ""
+                    value: `${root.toKiB(ResourceUsage.gpuVRamUsedMB)} / ${root.toKiB(ResourceUsage.gpuVRamTotalMB)} GiB`
                 }
             }
         }
