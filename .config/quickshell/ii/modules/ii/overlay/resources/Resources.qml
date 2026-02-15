@@ -15,6 +15,11 @@ StyledOverlayWidget {
     id: root
     minimumWidth: 300
     minimumHeight: 200
+
+    function toKiB(kb) {
+        return (kb / (1024 * 1024)).toFixed(1);
+    }
+
     property list<var> resources: [
         {
             "icon": "planner_review",
@@ -28,21 +33,21 @@ StyledOverlayWidget {
             "name": Translation.tr("GPU"),
             "history": ResourceUsage.gpuUsageHistory,
             "maxAvailableString": "",
-            "more":  `${ResourceUsage.gpuTempC} °C`
+            "more":  `${ResourceUsage.gpuTempC} °C\n${toKiB(ResourceUsage.gpuVRamUsed)} GiB used`
         },
         {
             "icon": "memory",
             "name": Translation.tr("RAM"),
             "history": ResourceUsage.memoryUsageHistory,
             "maxAvailableString": ResourceUsage.maxAvailableMemoryString,
-            "more": ""
+            "more": `${toKiB(ResourceUsage.memoryUsed)} GiB used`
         },
         {
             "icon": "swap_horiz",
             "name": Translation.tr("Swap"),
             "history": ResourceUsage.swapUsageHistory,
             "maxAvailableString": ResourceUsage.maxAvailableSwapString,
-            "more": ""
+            "more": `${toKiB(ResourceUsage.swapUsed)} GiB used`
         },
     ]
 
