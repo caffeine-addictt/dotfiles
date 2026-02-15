@@ -20,25 +20,29 @@ StyledOverlayWidget {
             "icon": "planner_review",
             "name": Translation.tr("CPU"),
             "history": ResourceUsage.cpuUsageHistory,
-            "maxAvailableString": ResourceUsage.maxAvailableCpuString
+            "maxAvailableString": "",
+            "more":  `${ResourceUsage.cpuTempC} °C`
         },
         {
             "icon": "planner_review",
             "name": Translation.tr("GPU"),
             "history": ResourceUsage.gpuUsageHistory,
-            "maxAvailableString": ResourceUsage.maxAvailableGpuString
+            "maxAvailableString": "",
+            "more":  `${ResourceUsage.gpuTempC} °C`
         },
         {
             "icon": "memory",
             "name": Translation.tr("RAM"),
             "history": ResourceUsage.memoryUsageHistory,
-            "maxAvailableString": ResourceUsage.maxAvailableMemoryString
+            "maxAvailableString": ResourceUsage.maxAvailableMemoryString,
+            "more": ""
         },
         {
             "icon": "swap_horiz",
             "name": Translation.tr("Swap"),
             "history": ResourceUsage.swapUsageHistory,
-            "maxAvailableString": ResourceUsage.maxAvailableSwapString
+            "maxAvailableString": ResourceUsage.maxAvailableSwapString,
+            "more": ""
         },
     ]
 
@@ -76,7 +80,10 @@ StyledOverlayWidget {
             ResourceSummary {
                 Layout.margins: 8
                 history: root.resources[tabBar.currentIndex]?.history ?? []
-                maxAvailableString: root.resources[tabBar.currentIndex]?.maxAvailableString ?? "--"
+                maxAvailableString: root.resources[tabBar.currentIndex]?.maxAvailableString
+                  ? Translation.tr("of %1").arg(root.resources[tabBar.currentIndex].maxAvailableString)
+                  : ""
+                more: root.resources[tabBar.currentIndex]?.more ?? ""
             }
         }
     }
@@ -85,6 +92,7 @@ StyledOverlayWidget {
         id: resourceSummary
         required property list<real> history
         required property string maxAvailableString
+        required property string more
         Layout.fillWidth: true
         Layout.fillHeight: true
         spacing: 12
@@ -100,7 +108,7 @@ StyledOverlayWidget {
                 }
             }
             StyledText {
-                text: Translation.tr("of %1").arg(resourceSummary.maxAvailableString)
+                text: [resourceSummary.maxAvailableString, resourceSummary.more].filter(s => s.length > 0).join("\n")
                 font {
                     // family: Appearance.font.family.numbers
                     // variableAxes: Appearance.font.variableAxes.numbers

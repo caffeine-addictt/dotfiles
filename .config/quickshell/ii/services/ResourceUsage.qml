@@ -31,8 +31,6 @@ Singleton {
     property real swapUsed: swapTotal - swapFree
     property real swapUsedPercentage: swapTotal > 0 ? (swapUsed / swapTotal) : 0
 
-    property string maxAvailableCpuString: "--"
-    property string maxAvailableGpuString: "--"
     property string maxAvailableMemoryString: kibToGibString(ResourceUsage.memoryTotal)
     property string maxAvailableSwapString: kibToGibString(ResourceUsage.swapTotal)
 
