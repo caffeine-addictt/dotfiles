@@ -46,7 +46,7 @@ ShellRoot {
         property bool extraCondition: true
         active: Config.ready && Config.options.panelFamily === identifier && extraCondition
     }
-    
+
     PanelFamilyLoader {
         identifier: "ii"
         component: IllogicalImpulseFamily {}

@@ -67,7 +67,7 @@ ContentPage {
             Item {
                 implicitWidth: 340
                 implicitHeight: 200
-                
+
                 StyledImage {
                     id: wallpaperPreview
                     anchors.fill: parent
