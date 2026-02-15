@@ -32,8 +32,8 @@ Singleton {
 
     property string maxAvailableCpuString: "--"
     property string maxAvailableGpuString: "--"
-    property string maxAvailableMemoryString: kibToGbString(ResourceUsage.memoryTotal)
-    property string maxAvailableSwapString: kibToGbString(ResourceUsage.swapTotal)
+    property string maxAvailableMemoryString: kibToGibString(ResourceUsage.memoryTotal)
+    property string maxAvailableSwapString: kibToGibString(ResourceUsage.swapTotal)
 
     readonly property int historyLength: Config?.options.resources.historyLength ?? 60
     property list<real> cpuUsageHistory: []
@@ -117,7 +117,7 @@ Singleton {
 
             // Parse GPU usage
             gpuUsage = Number(gpuUsageFD.text() ?? 0) / 100;
-            gpuVRamUsedMB = parseFloat(( Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1));
+            gpuVRamUsedMB = parseFloat((Number(gpuVRamUsedFD.text() ?? 0) / 1024).toFixed(1));
             gpuVRamTotalMB = Math.floor((Number(gpuVRamTotalFD.text() ?? 0)) / 1024);
             gpuTempC = parseFloat((Number(gpuTempFD.text() ?? 0) / 1000).toFixed(1));
 
