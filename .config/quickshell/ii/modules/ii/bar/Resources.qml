@@ -29,7 +29,7 @@ MouseArea {
         Resource {
             iconName: "memory"
             percentage: ResourceUsage.gpuUsage
-            shown: (Config.options.bar.resources.alwaysShowGpu && percentage > 0) || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
+            shown: (Config.options.bar.resources.alwaysShowGpu) || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
             Layout.leftMargin: shown ? 6 : 0
             warningThreshold: Config.options.bar.resources.gpuWarningThreshold
         }
@@ -37,7 +37,7 @@ MouseArea {
         Resource {
             iconName: "swap_horiz"
             percentage: ResourceUsage.memoryUsedPercentage
-            shown: (Config.options.bar.resources.alwaysShowMem && percentage > 0) || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
+            shown: Config.options.bar.resources.alwaysShowMem || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
             Layout.leftMargin: shown ? 6 : 0
             warningThreshold: Config.options.bar.resources.memoryWarningThreshold
         }
@@ -45,7 +45,7 @@ MouseArea {
         Resource {
             iconName: "swap_horiz"
             percentage: ResourceUsage.swapUsedPercentage
-            shown: (Config.options.bar.resources.alwaysShowSwap && percentage > 0) || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
+            shown: Config.options.bar.resources.alwaysShowSwap || (MprisController.activePlayer?.trackTitle == null) || root.alwaysShowAllResources
             Layout.leftMargin: shown ? 6 : 0
             warningThreshold: Config.options.bar.resources.swapWarningThreshold
         }
