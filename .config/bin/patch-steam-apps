@@ -1,0 +1,26 @@
+#!/bin/bash
+set -ueo pipefail
+
+STEAM_SHARE="$HOME/.var/app/com.valvesoftware.Steam/.local/share"
+
+# icons/steam/ -> .../@data/icons/
+ICONS_DIR_ROOT="$HOME/.local/share/icons/steam"
+ICONS_ROOT="$ICONS_DIR_ROOT/hicolor/"
+
+mkdir -p "$ICONS_DIR_ROOT"
+ln -snf "$STEAM_SHARE/icons/hicolor" "$ICONS_DIR_ROOT/hicolor"
+
+APP_DIR="$HOME/.local/share/applications/steam"
+rm -rf "$APP_DIR"
+mkdir -p "$APP_DIR"
+
+for f in "$STEAM_SHARE/applications/"*.desktop; do
+  cp "$f" "$APP_DIR/$(basename "$f")"
+
+  GAME_ID=$(grep '^Exec=' "$f" | sed -E 's/.*steam:\/\/rungameid\/([0-9]+).*/\1/')
+
+  ICON_PATH=$(find "$ICONS_ROOT" -type f -name "steam_icon_$GAME_ID.png" | sort -V | tail -n1)
+  sed -i "s|^Icon=.*|Icon=$ICON_PATH|" "$f"
+
+  echo "wrote $(basename "$f" | cut -d'.' -f1)"
+done
