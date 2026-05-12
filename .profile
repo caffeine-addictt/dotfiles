@@ -36,3 +36,4 @@ add_env_path XDG_DATA_DIRS "$HOME/.local/share/flatpak/exports/share"
 add_env_path XDG_DATA_DIRS "$HOME/.var/app/com.valvesoftware.Steam/.local/share"
 
 export SSH_AUTH_SOCK="/run/user/1000/gcr/ssh"
+export COMPOSE_MENU=false
