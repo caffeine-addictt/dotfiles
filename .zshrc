@@ -68,7 +68,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-alias ls='eza --icons'
+alias ls='eza --icons auto'
 compdef eza=ls
 alias c='clear'
 
