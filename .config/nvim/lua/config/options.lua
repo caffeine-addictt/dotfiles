@@ -4,7 +4,7 @@
 
 vim.opt.winbar = "%=%m %f"
 vim.g.autoformat = true
-vim.lsp.set_log_level("WARN")
+vim.lsp.log.set_level("WARN")
 
 local opt = vim.opt
 
