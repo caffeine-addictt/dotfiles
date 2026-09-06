@@ -126,6 +126,11 @@ hl.bind(
 			.. " || pidof slurp || grim -g \"$(slurp $SLURP_ARGS)\" \"/tmp/ocr_image.png\" && tesseract \"/tmp/ocr_image.png\" stdout -l $(tesseract --list-langs | awk 'NR>1{print $1}' | tr '\\\\n' '+' | sed 's/\\\\+$/\\\\n/') | wl-copy && rm \"/tmp/ocr_image.png\""
 	)
 )
+hl.bind(
+	"SUPER + Space",
+	hl.dsp.exec_cmd("fcitx5-remote -t"),
+	{ description = "Utilities: Toggle between japanese/english input" }
+)
 --# Color picker
 hl.bind(
 	"SUPER + SHIFT + C",
